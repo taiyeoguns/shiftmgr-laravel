@@ -1,0 +1,24 @@
+{
+  "name": "shiftmgr-laravel",
+  "description": "",
+  "main": "",
+  "authors": [
+    "taiyeoguns <taiyeoguns@yahoo.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "admin-lte": "^2.4.8",
+    "initial.js": "^0.1.0",
+    "Ionicons": "ionicons#2.0.1"
+  }
+}
