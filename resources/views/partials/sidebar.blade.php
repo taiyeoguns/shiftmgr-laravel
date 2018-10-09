@@ -8,7 +8,7 @@
         <img data-name="{{ $user->name or 'User' }}" class="img-circle avatar" alt="User Image">
       </div>
       <div class="pull-left info">
-        <p>{{ $user->name }}</p>
+        <p>{{ $user->name or 'User' }}</p>
       </div>
     </div>
 

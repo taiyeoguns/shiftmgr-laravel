@@ -82,7 +82,7 @@
             <!-- The user image in the navbar-->
             <img data-name="{{ $user->name or 'User' }}" class="user-image avatar" alt="User Image">
             <!-- hidden-xs hides the username on small devices so only the image appears. -->
-            <span class="hidden-xs">{{$user->name}}</span>
+            <span class="hidden-xs">{{$user->name or 'User'}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- The user image in the menu -->
@@ -90,7 +90,7 @@
               <img data-name="{{ $user->name or 'User' }}" class="img-circle avatar" alt="User Image">
 
               <p>
-                {{ $user->name }}
+                {{ $user->name or 'User' }}
                 <small>Member since Nov. 2012</small>
               </p>
             </li>
