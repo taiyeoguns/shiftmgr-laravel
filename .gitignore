@@ -12,5 +12,4 @@ npm-debug.log
 yarn-error.log
 .env
 backup
-
-/resources/assets/bower
+/tests/report

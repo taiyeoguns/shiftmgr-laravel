@@ -35,4 +35,7 @@
         <env name="DB_DATABASE" value=":memory:"/>
         <ini name="memory_limit" value="512M"/>
     </php>
+    <logging>
+        <log type="coverage-html" target="./tests/report" lowUpperBound="50" highLowerBound="80" />
+    </logging>
 </phpunit>
