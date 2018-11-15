@@ -6,6 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
+use App\User;
+
 class ComposerTest extends TestCase
 {
 
@@ -30,6 +32,8 @@ class ComposerTest extends TestCase
      */
     public function home_view_has_user_data_passed_from_composer()
     {
-    	$this->get($this->route)->assertViewHas('user');
+    	$user = factory(User::class)->create();
+
+    	$this->actingAs($user)->get($this->route)->assertViewHas('user', $user);
     }
 }

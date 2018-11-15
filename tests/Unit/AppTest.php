@@ -57,6 +57,28 @@ class AppTest extends TestCase
     /**
      * @test
      */
+    public function logged_in_user_gets_redirected_to_home_page_from_login_page()
+    {
+    	$user = factory(User::class)->create();
+
+    	$this->actingAs($user)->get(route('login'))->assertRedirect(route('home'));
+    }
+
+    /**
+     * @test
+     */
+    public function logged_in_user_can_view_home_page()
+    {
+    	$user = factory(User::class)->create();
+
+    	$response = $this->actingAs($user)->get(route('home'));
+
+    	$response->assertViewIs('dashboard');
+    }
+
+    /**
+     * @test
+     */
     public function user_can_be_registered()
     {
 
