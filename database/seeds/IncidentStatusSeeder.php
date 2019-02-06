@@ -12,7 +12,7 @@ class IncidentStatusSeeder extends Seeder
     public function run()
     {
         //
-		DB::table('incident_status')->insert([
+        DB::table('incident_status')->insert([
             ['id' => 1, 'title' => 'New'],
             ['id' => 2, 'title' => 'In Process'],
             ['id' => 3, 'title' => 'Customer Action'],

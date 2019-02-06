@@ -12,7 +12,7 @@ class GfmSeeder extends Seeder
     public function run()
     {
         //
-		DB::table('gfms')->insert([
+        DB::table('gfms')->insert([
             ['title' => 'ASE+'],
             ['title' => 'BI'],
             ['title' => 'EIM'],

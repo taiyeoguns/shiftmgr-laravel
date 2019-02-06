@@ -1,3 +1,3 @@
 //Scripts
 
-$('.avatar').initial();
+$(".avatar").initial();

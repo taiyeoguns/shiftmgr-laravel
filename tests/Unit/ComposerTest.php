@@ -2,17 +2,14 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-
 use App\User;
+
+use Tests\TestCase;
 
 class ComposerTest extends TestCase
 {
-
-	protected $route;
-	protected $view;
+    protected $route;
+    protected $view;
 
     public function setUp()
     {
@@ -22,8 +19,8 @@ class ComposerTest extends TestCase
 
         $this->route = 'home';
 
-        app('router')->get($this->route, [function() {
-        	return view($this->view);
+        app('router')->get($this->route, [function () {
+            return view($this->view);
         }]);
     }
 
@@ -32,8 +29,8 @@ class ComposerTest extends TestCase
      */
     public function home_view_has_user_data_passed_from_composer()
     {
-    	$user = factory(User::class)->create();
+        $user = factory(User::class)->create();
 
-    	$this->actingAs($user)->get($this->route)->assertViewHas('user', $user);
+        $this->actingAs($user)->get($this->route)->assertViewHas('user', $user);
     }
 }

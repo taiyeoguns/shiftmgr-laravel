@@ -106,7 +106,7 @@
 .shiftmgr .sidebar-form input[type="text"],
 .shiftmgr .sidebar-form .btn {
   -webkit-box-shadow: none;
-          box-shadow: none;
+  box-shadow: none;
   background-color: #374850;
   border: 1px solid transparent;
   height: 35px;

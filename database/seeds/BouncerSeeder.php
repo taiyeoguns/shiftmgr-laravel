@@ -15,27 +15,27 @@ class BouncerSeeder extends Seeder
     public function run()
     {
         //
-		Bouncer::allow('admin')->to([
-			'admin',
-			'create-shifts',
-			'read-shifts',
-			'read-all-shifts',
-			'update-shifts',
-			'create-calls',
-			'update-calls',
-		]);
-		
-		Bouncer::allow('manager')->to([
-			'read-shifts',
-			'update-shifts',
-			'create-calls',
-			'update-calls',
-		]);
-		
-		Bouncer::allow('engineer')->to([
-			'read-shifts',
-			'read-calls',
-			'update-calls'
-		]);
+        Bouncer::allow('admin')->to([
+            'admin',
+            'create-shifts',
+            'read-shifts',
+            'read-all-shifts',
+            'update-shifts',
+            'create-calls',
+            'update-calls',
+        ]);
+        
+        Bouncer::allow('manager')->to([
+            'read-shifts',
+            'update-shifts',
+            'create-calls',
+            'update-calls',
+        ]);
+        
+        Bouncer::allow('engineer')->to([
+            'read-shifts',
+            'read-calls',
+            'update-calls'
+        ]);
     }
 }

@@ -12,7 +12,7 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
-		DB::table('status')->insert([
+        DB::table('status')->insert([
             ['id' => 1, 'title' => 'Pending'],
             ['id' => 2, 'title' => 'Confirmed'],
             ['id' => 3, 'title' => 'Declined'],

@@ -13,3 +13,4 @@ yarn-error.log
 .env
 backup
 /tests/report
+.php_cs.cache

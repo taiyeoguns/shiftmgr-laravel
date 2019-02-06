@@ -1,0 +1,6 @@
+{
+  "hooks": {
+    "pre-commit": "npm run format && composer format",
+    "pre-push": "npm run format && composer format"
+  }
+}

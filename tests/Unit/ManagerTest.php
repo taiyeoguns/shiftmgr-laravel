@@ -2,12 +2,10 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Manager;
 
 use App\Shift;
-use App\Manager;
+use Tests\TestCase;
 
 class ManagerTest extends TestCase
 {
@@ -18,11 +16,11 @@ class ManagerTest extends TestCase
     {
         $manager = factory(Manager::class)->create();
         $shifts = factory(Shift::class, 3)
-        	->create()
-        	->each(function ($s) use($manager) {
-        		$s->manager()->associate($manager);
-        		$s->save();
-        	});
+            ->create()
+            ->each(function ($s) use ($manager) {
+                $s->manager()->associate($manager);
+                $s->save();
+            });
 
         $this->assertDatabaseHas('managers', ['id' => $manager->id]);
         $this->assertEquals(count($manager->shifts), 3);

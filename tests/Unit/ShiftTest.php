@@ -2,12 +2,11 @@
 
 namespace Tests\Unit;
 
-use Tests\TestCase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Manager;
 
 use App\Shift;
-use App\Manager;
 use Carbon\Carbon;
+use Tests\TestCase;
 
 class ShiftTest extends TestCase
 {
@@ -27,6 +26,5 @@ class ShiftTest extends TestCase
 
         $this->assertDatabaseHas('shifts', ['manager_id' => $mgr->id, 'shift_date' => $carbon_date]);
         $this->assertInstanceOf(Carbon::class, $shift->date);
-
     }
 }

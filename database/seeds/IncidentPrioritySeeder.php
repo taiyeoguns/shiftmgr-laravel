@@ -12,7 +12,7 @@ class IncidentPrioritySeeder extends Seeder
     public function run()
     {
         //
-		DB::table('incident_priority')->insert([
+        DB::table('incident_priority')->insert([
             ['id' => 1, 'title' => 'Very High'],
             ['id' => 2, 'title' => 'High'],
             ['id' => 3, 'title' => 'Medium'],

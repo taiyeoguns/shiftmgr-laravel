@@ -12,7 +12,7 @@ class ComponentSeeder extends Seeder
     public function run()
     {
         //
-		DB::table('components')->insert([
+        DB::table('components')->insert([
             ['title' => 'MOB-SUP*'],
             ['title' => 'MOB-ONP*'],
             ['title' => 'MOB-SYC*'],

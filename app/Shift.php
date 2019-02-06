@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class Shift extends Model
 {
@@ -11,17 +11,17 @@ class Shift extends Model
     protected $fillable = ['shift_date', 'manager_id'];
 
     public function manager()
-	{
-		return $this->belongsTo('App\Manager');
-	}
+    {
+        return $this->belongsTo('App\Manager');
+    }
 
-	public function setDateAttribute($date)
-	{
-		$this->attributes['shift_date'] = Carbon::createFromFormat('d/m/Y', $date);
-	}
+    public function setDateAttribute($date)
+    {
+        $this->attributes['shift_date'] = Carbon::createFromFormat('d/m/Y', $date);
+    }
 
-	public function getDateAttribute()
-	{
-		return Carbon::parse($this->attributes['shift_date']);
-	}
+    public function getDateAttribute()
+    {
+        return Carbon::parse($this->attributes['shift_date']);
+    }
 }

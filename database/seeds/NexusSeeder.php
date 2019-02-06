@@ -12,7 +12,7 @@ class NexusSeeder extends Seeder
     public function run()
     {
         //
-		DB::table('nexus')->insert([
+        DB::table('nexus')->insert([
             ['title' => 'Impl/Admin'],
             ['title' => 'Webi'],
             ['title' => 'ERQA'],
