@@ -164,6 +164,7 @@ return [
         * Custom Providers
         */
         App\Providers\ViewComposerServiceProvider::class,
+        App\Providers\RepositoryServiceProvider::class,
 
     ],
 
