@@ -16,13 +16,12 @@ Built with PHP and Laravel.
 Clone Project
 
 ```sh
-git clone https://github.com/taiyeoguns/shiftmgr-laravel.git shiftmgr-laravel
+git clone https://github.com/taiyeoguns/shiftmgr-laravel.git
 ```
 
 Install Composer dependencies
 
 ```sh
-cd shiftmgr-laravel
 composer install
 ```
 
