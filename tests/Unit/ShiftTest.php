@@ -25,5 +25,7 @@ class ShiftTest extends TestCase
 
         $this->assertDatabaseHas('shifts', ['manager_id' => $mgr->id, 'shift_date' => $carbon_date]);
         $this->assertInstanceOf(Carbon::class, $shift->date);
+        $this->assertEquals($shift->manager, $mgr);
+        $this->assertInstanceOf(Manager::class, $shift->manager);
     }
 }

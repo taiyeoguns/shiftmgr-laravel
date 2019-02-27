@@ -14,7 +14,7 @@ class ManagerTest extends TestCase
     public function manager_can_have_shifts()
     {
         $manager = factory(Manager::class)->create();
-        $shifts = factory(Shift::class, 3)
+        factory(Shift::class, 3)
             ->create()
             ->each(function ($s) use ($manager) {
                 $s->manager()->associate($manager);

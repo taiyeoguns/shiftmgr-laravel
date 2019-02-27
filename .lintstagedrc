@@ -1,0 +1,7 @@
+{
+  "linters": {
+    "*.{css,js,vue,json}": ["prettier --write", "git add"],
+    "*.php": ["composer format -- --config=.php_cs", "git add"]
+  },
+  "ignore": ["*.blade.php"]
+}

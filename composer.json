@@ -54,7 +54,7 @@
       "@php artisan package:discover"
     ],
     "format": [
-      "vendor/bin/php-cs-fixer fix"
+      "vendor\\bin\\php-cs-fixer fix"
     ]
   },
   "config": {
