@@ -54,11 +54,10 @@ Launch browser
 
 Navigate to `http://localhost:8000`
 
-
 ## Tests
 
 In command prompt, run:
 
 ```sh
-vendor\bin\phpunit
+vendor\bin\phpunit --testdox
 ```

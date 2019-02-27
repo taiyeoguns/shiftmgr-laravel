@@ -12,8 +12,11 @@
 */
 
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Manager;
+use App\Models\Shift;
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $fn = $faker->firstName,
         'last_name' => $ln = $faker->lastName,
@@ -25,13 +28,13 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\Manager::class, function (Faker\Generator $faker) {
+$factory->define(Manager::class, function (Faker\Generator $faker) {
     return [];
 });
 
-$factory->define(App\Shift::class, function (Faker\Generator $faker) {
+$factory->define(Shift::class, function (Faker\Generator $faker) {
     return [
         'shift_date' => $sd = Carbon::create(date('Y'), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
-        'manager_id' => factory(App\Manager::class)->create()->id,
+        'manager_id' => factory(Manager::class)->create()->id,
     ];
 });

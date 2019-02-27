@@ -2,9 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Manager;
-
-use App\Shift;
+use App\Models\Manager;
+use App\Models\Shift;
 use Carbon\Carbon;
 use Tests\TestCase;
 

@@ -2,9 +2,8 @@
 
 namespace Tests\Unit;
 
-use App\Manager;
-
-use App\Shift;
+use App\Models\Manager;
+use App\Models\Shift;
 use Tests\TestCase;
 
 class ManagerTest extends TestCase

@@ -1,9 +1,10 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Manager;
 
 class Shift extends Model
 {
@@ -12,7 +13,7 @@ class Shift extends Model
 
     public function manager()
     {
-        return $this->belongsTo('App\Manager');
+        return $this->belongsTo(Manager::class);
     }
 
     public function setDateAttribute($date)
