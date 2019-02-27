@@ -11,10 +11,10 @@
 |
 */
 
-use Carbon\Carbon;
-use App\Models\User;
 use App\Models\Manager;
 use App\Models\Shift;
+use App\Models\User;
+use Carbon\Carbon;
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
