@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "563e84862382ac2b1b17bd6c774add4b",
+    "content-hash": "4e09d376b033b0a3b34057821b58ca7f",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1595,6 +1595,56 @@
                 "uuid"
             ],
             "time": "2018-07-19T23:38:55+00:00"
+        },
+        {
+            "name": "rschaaphuizen/laravel-services",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rschaaphuizen/laravel-services.git",
+                "reference": "3c3e27fcf5da1029c3002872e4d5f250d8e1078f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rschaaphuizen/laravel-services/zipball/3c3e27fcf5da1029c3002872e4d5f250d8e1078f",
+                "reference": "3c3e27fcf5da1029c3002872e4d5f250d8e1078f",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rschaaphuizen\\Services\\ServicesServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rschaaphuizen\\Services\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ruud Schaaphuizen",
+                    "email": "r.schaaphuizen@sqits.nl",
+                    "homepage": "https://www.sqits.nl",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Package to create services with artisan",
+            "keywords": [
+                "artisan",
+                "laravel",
+                "services"
+            ],
+            "time": "2017-11-07T11:29:54+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
