@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class StatusSeeder extends Seeder
+class PrioritySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,10 @@ class StatusSeeder extends Seeder
     public function run()
     {
         //
-        DB::table('status')->insert([
-            ['title' => 'Ongoing'],
-            ['title' => 'Completed'],
+        DB::table('priorities')->insert([
+            ['title' => 'High'],
+            ['title' => 'Medium'],
+            ['title' => 'Low'],
         ]);
     }
 }

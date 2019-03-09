@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 
 //bouncer
-//use Bouncer; //not needed
+//use Bouncer;
 
 class BouncerSeeder extends Seeder
 {
@@ -21,21 +21,21 @@ class BouncerSeeder extends Seeder
             'read-shifts',
             'read-all-shifts',
             'update-shifts',
-            'create-calls',
-            'update-calls',
+            'create-tasks',
+            'update-tasks',
         ]);
-        
+
         Bouncer::allow('manager')->to([
             'read-shifts',
             'update-shifts',
-            'create-calls',
-            'update-calls',
+            'create-tasks',
+            'update-tasks',
         ]);
-        
-        Bouncer::allow('engineer')->to([
+
+        Bouncer::allow('member')->to([
             'read-shifts',
-            'read-calls',
-            'update-calls'
+            'read-tasks',
+            'update-tasks'
         ]);
     }
 }

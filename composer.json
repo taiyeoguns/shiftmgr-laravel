@@ -14,7 +14,8 @@
     "laravel/framework": "5.6.*",
     "laravel/tinker": "^1.0",
     "prettus/l5-repository": "^2.6",
-    "rschaaphuizen/laravel-services": "^1.0"
+    "rschaaphuizen/laravel-services": "^1.0",
+    "silber/bouncer": "v1.0.0-rc.5"
   },
   "require-dev": {
     "filp/whoops": "^2.0",

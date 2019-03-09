@@ -12,15 +12,24 @@
 */
 
 use App\Models\Manager;
+use App\Models\Member;
 use App\Models\Shift;
 use App\Models\User;
 use Carbon\Carbon;
+
+$factory->define(Manager::class, function () {
+    return [];
+});
+
+$factory->define(Member::class, function () {
+    return [];
+});
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
         'first_name' => $fn = $faker->firstName,
         'last_name' => $ln = $faker->lastName,
-        'email' => strtolower(sprintf('%s.%s@dutymanager.local', $fn, $ln)),
+        'email' => strtolower(sprintf('%s.%s@shiftmanager.local', $fn, $ln)),
         'phone' => $faker->phoneNumber,
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
@@ -28,13 +37,8 @@ $factory->define(User::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(Manager::class, function (Faker\Generator $faker) {
-    return [];
-});
-
 $factory->define(Shift::class, function (Faker\Generator $faker) {
     return [
-        'shift_date' => $sd = Carbon::create(date('Y'), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
-        'manager_id' => factory(Manager::class)->create()->id,
+        'shift_date' => Carbon::create(date('Y'), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
     ];
 });

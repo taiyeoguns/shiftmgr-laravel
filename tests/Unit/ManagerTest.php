@@ -15,7 +15,7 @@ class ManagerTest extends TestCase
     {
         $manager = factory(Manager::class)->create();
         factory(Shift::class, 3)
-            ->create()
+            ->make()
             ->each(function ($s) use ($manager) {
                 $s->manager()->associate($manager);
                 $s->save();
