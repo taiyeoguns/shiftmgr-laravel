@@ -84,6 +84,11 @@ class DatabaseSeeder extends Seeder
 
             //assign role
             Bouncer::assign('member')->to($user);
+
+            //get random shift and assign to member
+            $shift = Shift::inRandomOrder()->first();
+
+            $shift->members()->attach($member->id);
         });
 
         $this->command->info("Done.");

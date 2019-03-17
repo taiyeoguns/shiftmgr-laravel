@@ -3,5 +3,7 @@
     "/css/vendor.min.css": "/css/vendor.min.css",
     "/css/app.min.css": "/css/app.min.css",
     "/js/vendor.min.js": "/js/vendor.min.js",
-    "/js/app.min.js": "/js/app.min.js"
+    "/js/app.min.js": "/js/app.min.js",
+    "/css/shifts/index.min.css": "/css/shifts/index.min.css",
+    "/js/shifts/index.min.js": "/js/shifts/index.min.js"
 }

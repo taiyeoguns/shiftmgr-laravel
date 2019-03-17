@@ -1,29 +1,19 @@
-/*
- * Skin: Shiftmgr
- * ----------
- */
 .shiftmgr .main-header .navbar {
   background-color: #2980b9;
 }
 .shiftmgr .main-header .navbar .nav > li > a {
   color: #fff;
 }
-.shiftmgr .main-header .navbar .nav > li > a:hover,
+.shiftmgr .main-header .navbar .nav .open > a,
+.shiftmgr .main-header .navbar .nav .open > a:focus,
+.shiftmgr .main-header .navbar .nav .open > a:hover,
+.shiftmgr .main-header .navbar .nav > .active > a,
 .shiftmgr .main-header .navbar .nav > li > a:active,
 .shiftmgr .main-header .navbar .nav > li > a:focus,
-.shiftmgr .main-header .navbar .nav .open > a,
-.shiftmgr .main-header .navbar .nav .open > a:hover,
-.shiftmgr .main-header .navbar .nav .open > a:focus,
-.shiftmgr .main-header .navbar .nav > .active > a {
-  background: rgba(0, 0, 0, 0.1);
-  color: #f6f6f6;
-}
-.shiftmgr .main-header .navbar .sidebar-toggle {
-  color: #fff;
-}
+.shiftmgr .main-header .navbar .nav > li > a:hover,
 .shiftmgr .main-header .navbar .sidebar-toggle:hover {
-  color: #f6f6f6;
   background: rgba(0, 0, 0, 0.1);
+  color: #f6f6f6;
 }
 .shiftmgr .main-header .navbar .sidebar-toggle {
   color: #fff;
@@ -33,7 +23,7 @@
 }
 @media (max-width: 767px) {
   .shiftmgr .main-header .navbar .dropdown-menu li.divider {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: hsla(0, 0%, 100%, 0.1);
   }
   .shiftmgr .main-header .navbar .dropdown-menu li a {
     color: #fff;
@@ -56,9 +46,9 @@
 .shiftmgr .content-header {
   background: transparent;
 }
-.shiftmgr .wrapper,
+.shiftmgr .left-side,
 .shiftmgr .main-sidebar,
-.shiftmgr .left-side {
+.shiftmgr .wrapper {
   background-color: #222d32;
 }
 .shiftmgr .user-panel > .info,
@@ -72,9 +62,9 @@
 .shiftmgr .sidebar-menu > li > a {
   border-left: 3px solid transparent;
 }
-.shiftmgr .sidebar-menu > li:hover > a,
 .shiftmgr .sidebar-menu > li.active > a,
-.shiftmgr .sidebar-menu > li.menu-open > a {
+.shiftmgr .sidebar-menu > li.menu-open > a,
+.shiftmgr .sidebar-menu > li:hover > a {
   color: #fff;
   background: #1e282c;
 }
@@ -101,10 +91,10 @@
 .shiftmgr .sidebar-form {
   border-radius: 3px;
   border: 1px solid #374850;
-  margin: 10px 10px;
+  margin: 10px;
 }
-.shiftmgr .sidebar-form input[type="text"],
-.shiftmgr .sidebar-form .btn {
+.shiftmgr .sidebar-form .btn,
+.shiftmgr .sidebar-form input[type="text"] {
   -webkit-box-shadow: none;
   box-shadow: none;
   background-color: #374850;

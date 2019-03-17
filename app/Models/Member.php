@@ -15,4 +15,14 @@ class Member extends Model
     {
         return $this->morphOne(User::class, 'userable');
     }
+
+    /**
+     * Shifts belonging to this member
+     *
+     * @return void
+     */
+    public function shifts()
+    {
+        return $this->belongsToMany(Shift::class)->withTimestamps();
+    }
 }

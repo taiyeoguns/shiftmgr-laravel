@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Manager;
+use App\Models\Member;
 use App\Models\User;
+use Bouncer;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -52,6 +55,8 @@ class RegisterController extends Controller
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'string|max:255',
+            'type' => 'string|max:255',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -64,11 +69,32 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
+
+        if ($data['type'] == 'member') {
+            $member = new Member();
+            $member->save();
+            $member->user()->save($user);
+
+            //assign role
+            Bouncer::assign('member')->to($user);
+        }
+
+        if ($data['type'] == 'manager') {
+            $manager = new Manager();
+            $manager->save();
+            $manager->user()->save($user);
+
+            //assign role
+            Bouncer::assign('manager')->to($user);
+        }
+
+        return $user;
     }
 }

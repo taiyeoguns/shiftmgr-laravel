@@ -2,18 +2,18 @@
 
 namespace App\Repositories;
 
-use App\Models\User;
+use App\Models\Shift;
 use Prettus\Repository\Contracts\CacheableInterface;
 use Prettus\Repository\Criteria\RequestCriteria;
 use Prettus\Repository\Eloquent\BaseRepository;
 use Prettus\Repository\Traits\CacheableRepository;
 
 /**
- * Class UserRepositoryEloquent.
+ * Class ShiftRepositoryEloquent.
  *
  * @package namespace App\Repositories;
  */
-class UserRepositoryEloquent extends BaseRepository implements UserRepository, CacheableInterface
+class ShiftRepositoryEloquent extends BaseRepository implements ShiftRepository, CacheableInterface
 {
     use CacheableRepository;
 
@@ -24,7 +24,7 @@ class UserRepositoryEloquent extends BaseRepository implements UserRepository, C
      */
     public function model()
     {
-        return User::class;
+        return Shift::class;
     }
 
 
