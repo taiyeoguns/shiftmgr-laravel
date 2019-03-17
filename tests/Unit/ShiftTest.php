@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use App\Models\Manager;
 use App\Models\Shift;
+use App\Models\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 
@@ -27,5 +28,19 @@ class ShiftTest extends TestCase
         $this->assertInstanceOf(Carbon::class, $shift->date);
         $this->assertEquals($shift->manager, $mgr);
         $this->assertInstanceOf(Manager::class, $shift->manager);
+    }
+
+    /**
+     * @test
+     *
+     */
+    public function shifts_index_page_returns_shifts()
+    {
+        $user = factory(User::class)->create();
+
+        $response = $this->actingAs($user)->get(route('shifts-index'));
+
+        $response->assertViewHas('past_shifts');
+        $response->assertViewHas('upcoming_shifts');
     }
 }

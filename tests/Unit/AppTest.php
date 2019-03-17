@@ -3,7 +3,6 @@
 namespace Tests\Unit;
 
 use App\Models\User;
-use Illuminate\Support\Facades\Session;
 
 use Tests\TestCase;
 
@@ -43,7 +42,7 @@ class AppTest extends TestCase
     public function guest_is_redirected_to_login()
     {
         //given user tries to go to authenticated view
-        $response = $this->get(route('home'));
+        $response = $this->get(route('shifts-index'));
 
         //when they are a guest
 
@@ -55,23 +54,23 @@ class AppTest extends TestCase
     /**
      * @test
      */
-    public function logged_in_user_gets_redirected_to_home_page_from_login_page()
+    public function logged_in_user_gets_redirected_to_shifts_page_from_login_page()
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('login'))->assertRedirect(route('home'));
+        $this->actingAs($user)->get(route('login'))->assertRedirect(route('shifts-index'));
     }
 
     /**
      * @test
      */
-    public function logged_in_user_can_view_home_page()
+    public function logged_in_user_can_view_shifts_page()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('home'));
+        $response = $this->actingAs($user)->get(route('shifts-index'));
 
-        $response->assertViewIs('dashboard');
+        $response->assertViewIs('shifts.index');
     }
 
     /**
@@ -79,13 +78,12 @@ class AppTest extends TestCase
      */
     public function user_can_be_registered()
     {
-
-        //Session::start();
-
         $user = [
             'first_name' => $fn = $this->faker->firstName,
             'last_name' => $ln = $this->faker->lastName,
-            'email' => strtolower(sprintf('%s.%s@dutymanager.local', $fn, $ln)),
+            'email' => strtolower(sprintf('%s.%s@shiftmanager.local', $fn, $ln)),
+            'phone' => $this->faker->phoneNumber,
+            'type'  => $this->faker->randomElement(['member', 'manager']),
             'password' => 'Password123',
             'password_confirmation' => 'Password123'
 
@@ -93,13 +91,13 @@ class AppTest extends TestCase
 
         $response = $this->post(route('register'), $user);
 
-        $response->assertRedirect('/home');
+        $response->assertRedirect('/shifts');
         $this->assertDatabaseHas('users', [
             'first_name' => $user['first_name'],
             'last_name' => $user['last_name'],
             'email' => $user['email']
         ]);
-        $this->assertCount(1, $users = User::all());
+        $this->assertCount(1, User::all());
     }
 
     /**

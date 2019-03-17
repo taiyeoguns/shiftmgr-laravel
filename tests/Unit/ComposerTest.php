@@ -17,7 +17,7 @@ class ComposerTest extends TestCase
 
         $this->view = 'partials.header';
 
-        $this->route = 'home';
+        $this->route = 'shifts';
 
         app('router')->get($this->route, [function () {
             return view($this->view);
@@ -27,7 +27,7 @@ class ComposerTest extends TestCase
     /**
      * @test
      */
-    public function home_view_has_user_data_passed_from_composer()
+    public function shifts_view_has_user_data_passed_from_composer()
     {
         $user = factory(User::class)->create();
 
