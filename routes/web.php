@@ -11,10 +11,10 @@
 |
 */
 
+Auth::routes();
+
 Route::get('/', function () {
     return view('home');
 });
 
-Auth::routes();
-
-Route::get('/shifts', 'ShiftController@index')->name('shifts-index');
+Route::get('/shifts', 'ShiftController@index')->name('shifts.index');

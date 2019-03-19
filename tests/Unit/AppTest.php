@@ -42,7 +42,7 @@ class AppTest extends TestCase
     public function guest_is_redirected_to_login()
     {
         //given user tries to go to authenticated view
-        $response = $this->get(route('shifts-index'));
+        $response = $this->get(route('shifts.index'));
 
         //when they are a guest
 
@@ -58,7 +58,7 @@ class AppTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $this->actingAs($user)->get(route('login'))->assertRedirect(route('shifts-index'));
+        $this->actingAs($user)->get(route('login'))->assertRedirect(route('shifts.index'));
     }
 
     /**
@@ -68,7 +68,7 @@ class AppTest extends TestCase
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get(route('shifts-index'));
+        $response = $this->actingAs($user)->get(route('shifts.index'));
 
         $response->assertViewIs('shifts.index');
     }
@@ -98,15 +98,5 @@ class AppTest extends TestCase
             'email' => $user['email']
         ]);
         $this->assertCount(1, User::all());
-    }
-
-    /**
-     * @test
-     */
-    public function user_full_name_is_returned()
-    {
-        $user = factory(User::class)->make();
-
-        $this->assertEquals($user->name, sprintf('%s %s', $user->first_name, $user->last_name));
     }
 }

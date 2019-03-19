@@ -1,5 +1,7 @@
 <?php
 
+namespace Tests\Unit\Services;
+
 use App\Models\Manager;
 use App\Models\Shift;
 use App\Repositories\ShiftRepository;
@@ -19,7 +21,7 @@ class ShiftServiceTest extends TestCase
 
         $shifts = $shiftService->getShifts();
 
-        $this->assertArrayHasKey('past_shifts', $shifts);
+        $this->assertArrayHasKey('pastShifts', $shifts);
     }
 
     /**
@@ -42,7 +44,7 @@ class ShiftServiceTest extends TestCase
 
         $shifts = $shiftService->getShifts();
 
-        $this->assertCount(2, $shifts['past_shifts']);
+        $this->assertCount(2, $shifts['pastShifts']);
     }
 
     /**
@@ -65,6 +67,28 @@ class ShiftServiceTest extends TestCase
 
         $shifts = $shiftService->getShifts();
 
-        $this->assertCount(2, $shifts['upcoming_shifts']);
+        $this->assertCount(2, $shifts['upcomingShifts']);
+    }
+
+    /**
+     * @test
+     */
+    public function get_shifts_returns_ongoing_shift()
+    {
+        Carbon::setTestNow(Carbon::create(2019, 3, 16));
+
+        $mgr = factory(Manager::class)->create();
+
+        $shift = new Shift();
+        $shift->date = "16/03/2019";
+        $shift->manager()->associate($mgr);
+        $shift->save();
+
+        $shiftRepository = app(ShiftRepository::class);
+        $shiftService = new ShiftService($shiftRepository);
+
+        $shifts = $shiftService->getShifts();
+
+        $this->assertTrue($shift->is($shifts['ongoingShift']));
     }
 }

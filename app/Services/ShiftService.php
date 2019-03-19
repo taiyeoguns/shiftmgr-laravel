@@ -18,7 +18,7 @@ class ShiftService
     {
         $shifts = $this->shiftRepository->all();
 
-        $past_shifts = $shifts
+        $pastShifts = $shifts
             ->filter(function ($shift, $key) {
                 return $shift->date->lt(Carbon::today());
             })
@@ -26,23 +26,23 @@ class ShiftService
                 return $shift->date;
             });
 
-        $upcoming_shifts = $shifts
+        $upcomingShifts = $shifts
             ->filter(function ($shift, $key) {
                 return $shift->date->gt(Carbon::today());
             })->sortBy(function ($shift, $key) {
                 return $shift->date;
             });
 
-        $ongoing_shift = $shifts
+        $ongoingShift = $shifts
             ->filter(function ($shift) {
-                return $shift->date->eq(Carbon::today());
+                return $shift->date->isSameDay(Carbon::today());
             })
             ->first();
 
         return [
-            'past_shifts' => $past_shifts,
-            'upcoming_shifts' => $upcoming_shifts,
-            'ongoing_shift' => $ongoing_shift
+            'pastShifts' => $pastShifts,
+            'upcomingShifts' => $upcomingShifts,
+            'ongoingShift' => $ongoingShift
         ];
     }
 }

@@ -15,7 +15,7 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MENU</li>
-            <li class="active"><a href="{{ route('shifts-index') }}"><i class="fa fa-calendar"></i> <span>Shifts</span></a></li>
+            <li class="active"><a href="{{ route('shifts.index') }}"><i class="fa fa-calendar"></i> <span>Shifts</span></a></li>
         </ul>
         <!-- /.sidebar-menu -->
     </section>

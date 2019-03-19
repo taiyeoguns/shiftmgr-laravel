@@ -24,11 +24,11 @@ class ShiftController extends Controller
     public function index()
     {
         $shifts = $this->shiftService->getShifts();
-        $past_shifts =$shifts['past_shifts'];
-        $upcoming_shifts =$shifts['upcoming_shifts'];
-        $ongoing_shift =$shifts['ongoing_shift'];
+        $pastShifts = $shifts['pastShifts'];
+        $upcomingShifts = $shifts['upcomingShifts'];
+        $ongoingShift = $shifts['ongoingShift'];
 
-        return view('shifts.index', compact(['past_shifts', 'upcoming_shifts', 'ongoing_shift']));
+        return view('shifts.index', compact(['pastShifts', 'upcomingShifts', 'ongoingShift']));
     }
 
     /**

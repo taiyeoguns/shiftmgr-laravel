@@ -53,7 +53,7 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    public function is_manager()
+    public function isManager()
     {
         return ($this->userable instanceof Manager);
     }
@@ -63,7 +63,7 @@ class User extends Authenticatable
      *
      * @return boolean
      */
-    public function is_member()
+    public function isMember()
     {
         return ($this->userable instanceof Member);
     }

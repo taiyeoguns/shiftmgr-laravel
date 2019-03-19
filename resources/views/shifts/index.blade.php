@@ -9,7 +9,7 @@
 
 <br />
 
-@if($ongoing_shift != null)
+@if($ongoingShift != null)
 <div class="box box-success">
     <div class="box-header with-border">
         <h3 class="box-title">Today&apos;s Shift</h3>
@@ -26,16 +26,16 @@
             <thead>
                 <tr>
                     <th>Shift Date</th>
-                    @if(auth()->user()->is_member() || auth()->user()->isAn('admin'))
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <th>Manager</th>
                     @endif
                 </tr>
             </thead>
             <tbody>
-                <tr href="{{ url('shifts', [$ongoing_shift->id]) }}">
-                    <td>{{ $ongoing_shift->date->format('d/m/Y') }}</td>
-                    @if(auth()->user()->is_member() || auth()->user()->isAn('admin'))
-                    <td>{{ $ongoing_shift->manager->user->name }}</td>
+                <tr href="{{ url('shifts', [$ongoingShift->id]) }}">
+                    <td>{{ $ongoingShift->date->format('d/m/Y') }}</td>
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
+                    <td>{{ $ongoingShift->manager->user->name }}</td>
                     @endif
                 </tr>
             </tbody>
@@ -57,23 +57,23 @@
     </div>
     <div class="box-body">
         <!---->
-        @if($upcoming_shifts->isEmpty())
+        @if($upcomingShifts->isEmpty())
         <em>No upcoming shifts.</em>
         @else
         <table class="table table-bordered table-hover table-striped shifts-table">
             <thead>
                 <tr>
                     <th>Shift Date</th>
-                    @if(auth()->user()->is_member())
+                    @if(auth()->user()->isMember())
                     <th>Manager</th>
                     @endif
                 </tr>
             </thead>
             <tbody>
-                @foreach($upcoming_shifts as $shift)
+                @foreach($upcomingShifts as $shift)
                 <tr href="{{ url('shifts', [$shift->id]) }}" id="{{ $shift->id }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
-                    @if(auth()->user()->is_member())
+                    @if(auth()->user()->isMember())
                     <td>{{ $shift->manager->user->name }}</td>
                     @endif
                 </tr>
@@ -86,7 +86,7 @@
 </div>
 
 
-@unless($past_shifts->isEmpty())
+@unless($pastShifts->isEmpty())
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Past Shifts</h3>
@@ -109,7 +109,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($past_shifts as $shift)
+                @foreach($pastShifts as $shift)
                 <tr href="{{ url('shifts', [$shift->id]) }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
                     @cannot('create-calls')
