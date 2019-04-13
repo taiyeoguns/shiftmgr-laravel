@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Database\Eloquent\Model;
 
 class Shift extends Model
 {
+    use GeneratesUuid;
+
     protected $dates = ['shift_date'];
     protected $fillable = ['shift_date', 'manager_id'];
 

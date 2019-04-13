@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Dyrynda\Database\Support\GeneratesUuid;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
@@ -10,6 +11,7 @@ class User extends Authenticatable
 {
     use Notifiable;
     use HasRolesAndAbilities;
+    use GeneratesUuid;
 
     /**
      * The attributes that are mass assignable.

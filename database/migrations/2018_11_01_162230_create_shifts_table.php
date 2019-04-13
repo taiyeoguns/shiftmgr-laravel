@@ -15,9 +15,10 @@ class CreateShiftsTable extends Migration
     {
         Schema::create('shifts', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->uuid('uuid');
             $table->integer('manager_id')->unsigned();
             $table->foreign('manager_id')->references('id')->on('managers')->onDelete('cascade');
-            $table->date('shift_date');
+            $table->date('shift_date')->unique();
             $table->timestamps();
         });
     }

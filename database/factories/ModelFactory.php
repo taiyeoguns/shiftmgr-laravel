@@ -16,6 +16,7 @@ use App\Models\Member;
 use App\Models\Shift;
 use App\Models\User;
 use Carbon\Carbon;
+use Ramsey\Uuid\Uuid;
 
 $factory->define(Manager::class, function () {
     return [];
@@ -27,6 +28,7 @@ $factory->define(Member::class, function () {
 
 $factory->define(User::class, function (Faker\Generator $faker) {
     return [
+        'uuid'  => Uuid::uuid4()->toString(),
         'first_name' => $fn = $faker->firstName,
         'last_name' => $ln = $faker->lastName,
         'email' => strtolower(sprintf('%s.%s@shiftmanager.local', $fn, $ln)),
@@ -39,6 +41,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
 
 $factory->define(Shift::class, function (Faker\Generator $faker) {
     return [
-        'shift_date' => Carbon::create(date('Y'), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
+        'uuid'  => Uuid::uuid4()->toString(),
+        'shift_date' => Carbon::create($faker->year($max = "now"), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
     ];
 });
