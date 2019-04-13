@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,46 +21,51 @@
 </head>
 
 <body class="hold-transition shiftmgr">
-<div class="wrapper">
+  <div class="wrapper">
 
-  @include('partials.header')
+    @include('partials.header')
 
-  <!-- Left side column. contains the logo and sidebar -->
+    <!-- Left side column. contains the logo and sidebar -->
 
-  @include('partials.sidebar')
+    @include('partials.sidebar')
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <h1>
-        {{ $page_title or null }}
-        <small>{{ $page_description or null }}</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
-        <li class="active">Here</li>
-      </ol>
-    </section>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          {{ $page_title or null }}
+          <small>{{ $page_description or null }}</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+          <li class="active">Here</li>
+        </ol>
+      </section>
 
-    <!-- Main content -->
-    <section class="content">
+      <!-- Main content -->
+      <section class="content">
 
-      @yield('content')
+        <br />
 
-    </section>
-    <!-- /.content -->
+        @include('flash::message')
+
+        @yield('content')
+
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    @include('partials.footer')
+
   </div>
-  <!-- /.content-wrapper -->
 
-  @include('partials.footer')
-
-</div>
-
-<!-- js -->
-<script src="{{ mix('js/vendor.min.js') }}"></script>
-<script src="{{ mix('js/app.min.js') }}"></script>
-@yield('page-js')
+  <!-- js -->
+  <script src="{{ mix('js/vendor.min.js') }}"></script>
+  <script src="{{ mix('js/app.min.js') }}"></script>
+  @yield('page-js')
 
 </body>
+
 </html>
