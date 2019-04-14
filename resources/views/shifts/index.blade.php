@@ -7,6 +7,12 @@
 
 @section('content')
 
+<div class="row">
+    <p class="text-center">
+        <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Shift</a>
+    </p>
+</div>
+
 <br />
 
 @if($ongoingShift != null)
@@ -32,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr href="{{ url('shifts', [$ongoingShift->id]) }}">
+                <tr href="{{ url('shifts', [$ongoingShift->uuid]) }}">
                     <td>{{ $ongoingShift->date->format('d/m/Y') }}</td>
                     @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <td>{{ $ongoingShift->manager->user->name }}</td>
@@ -71,7 +77,7 @@
             </thead>
             <tbody>
                 @foreach($upcomingShifts as $shift)
-                <tr href="{{ url('shifts', [$shift->id]) }}" id="{{ $shift->id }}">
+                <tr href="{{ url('shifts', [$shift->uuid]) }}" id="{{ $shift->uuid }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
                     @if(auth()->user()->isMember())
                     <td>{{ $shift->manager->user->name }}</td>
@@ -110,7 +116,7 @@
             </thead>
             <tbody>
                 @foreach($pastShifts as $shift)
-                <tr href="{{ url('shifts', [$shift->id]) }}">
+                <tr href="{{ url('shifts', [$shift->uuid]) }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
                     @cannot('create-calls')
                     <td>{{ $shift->manager->user->name }}</td>
@@ -127,6 +133,8 @@
 
 @endsection
 
+@include('shifts.modals.create')
+
 @section('page-js')
 <script src="{{ mix('js/shifts/index.min.js') }}"></script>
-@endsection 
+@endsection

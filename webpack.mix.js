@@ -71,6 +71,10 @@ mix.styles(
   "public/css/shifts/index.min.css"
 );
 
+//copy css images
+mix.copy(nodeDir + "chosen-js/chosen-sprite.png", "public/css/shifts");
+mix.copy(nodeDir + "chosen-js/chosen-sprite@2x.png", "public/css/shifts");
+
 mix.scripts(
   [
     nodeDir + "datatables.net/js/jquery.dataTables.min.js",
@@ -80,6 +84,8 @@ mix.scripts(
     nodeDir + "chosen-js/chosen.jquery.min.js",
     nodeDir + "bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js",
     nodeDir + "jquery-confirm/dist/jquery-confirm.min.js",
+    nodeDir + "jquery-validation/dist/jquery.validate.min.js",
+    jsDir + "ext/jquery.validate.bootstrap.js",
     jsDir + "/shifts/index.js"
   ],
   "public/js/shifts/index.min.js"

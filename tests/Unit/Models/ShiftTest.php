@@ -35,6 +35,59 @@ class ShiftTest extends TestCase
      * @test
      *
      */
+    public function shift_can_be_created_with_request()
+    {
+        $user = factory(User::class)->create();
+        $manager = factory(Manager::class)->create();
+        $members = factory(Member::class, 3)->create();
+        $date = "13/04/2019";
+
+        $response = $this->actingAs($user)->json("POST", route("shifts.store"), [
+            "shift_date" => $date,
+            "manager" => $manager->id,
+            "members" => $members->pluck('id')
+        ]);
+
+        $response->assertRedirect(route("shifts.index"));
+        $response->assertSessionHas("flash_notification");
+        $this->assertDatabaseHas(
+            "shifts",
+            [
+                "manager_id" => $manager->id,
+            ]
+        );
+    }
+
+    /**
+     * @test
+     *
+     */
+    public function shift_with_duplicate_date_is_not_saved()
+    {
+        $user = factory(User::class)->create();
+        $manager = factory(Manager::class)->create();
+        $members = factory(Member::class, 3)->create();
+
+        factory(Shift::class)->create([
+            "shift_date" => Carbon::create(2019, 4, 13),
+            "manager_id" => $manager->id
+        ]);
+
+        $response = $this->actingAs($user)->json("POST", route("shifts.store"), [
+            "shift_date" => "13/04/2019",
+            "manager" => $manager->id,
+            "members" => $members->pluck('id')
+        ]);
+
+        $this->assertCount(1, Shift::all());
+        $response->assertRedirect(route("shifts.index"));
+        $response->assertSessionHas("flash_notification");
+    }
+
+    /**
+     * @test
+     *
+     */
     public function shifts_index_page_returns_shifts()
     {
         $user = factory(User::class)->create();

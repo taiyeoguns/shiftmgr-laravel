@@ -5,5 +5,7 @@
     "/js/vendor.min.js": "/js/vendor.min.js",
     "/js/app.min.js": "/js/app.min.js",
     "/css/shifts/index.min.css": "/css/shifts/index.min.css",
+    "/css/shifts/chosen-sprite.png": "/css/shifts/chosen-sprite.png",
+    "/css/shifts/chosen-sprite@2x.png": "/css/shifts/chosen-sprite@2x.png",
     "/js/shifts/index.min.js": "/js/shifts/index.min.js"
 }

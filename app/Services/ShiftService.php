@@ -45,4 +45,13 @@ class ShiftService
             'ongoingShift' => $ongoingShift
         ];
     }
+
+    public function addShift($date, $manager, $members)
+    {
+        $shift = $this->shiftRepository->create(['shift_date' => Carbon::createFromFormat('d/m/Y', $date), 'manager_id' => $manager]);
+
+        $shift->members()->attach($members);
+
+        return $shift;
+    }
 }

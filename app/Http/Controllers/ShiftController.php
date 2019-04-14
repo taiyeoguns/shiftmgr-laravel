@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreShift;
+use App\Repositories\ManagerRepository;
+use App\Repositories\MemberRepository;
 use App\Services\ShiftService;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class ShiftController extends Controller
@@ -21,35 +25,44 @@ class ShiftController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ManagerRepository $managerRepository, MemberRepository $memberRepository)
     {
         $shifts = $this->shiftService->getShifts();
         $pastShifts = $shifts['pastShifts'];
         $upcomingShifts = $shifts['upcomingShifts'];
         $ongoingShift = $shifts['ongoingShift'];
 
-        return view('shifts.index', compact(['pastShifts', 'upcomingShifts', 'ongoingShift']));
-    }
+        $managers = $managerRepository->with('user')->all();
+        $members = $memberRepository->with('user')->all();
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return view('shifts.index', compact([
+            'pastShifts',
+            'upcomingShifts',
+            'ongoingShift',
+            'managers',
+            'members'
+        ]));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreShift $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreShift $request)
     {
-        //
+        try {
+            $shift = $this->shiftService->addShift($request->shift_date, $request->manager, $request->members);
+
+            flash("Shift created successfully!")->success();
+            info("Shift created", ["id" => $shift->id]);
+        } catch (QueryException $e) {
+            flash("Date already exists")->error()->important();
+            logger()->error($e->getMessage());
+        }
+
+        return redirect()->route('shifts.index');
     }
 
     /**
@@ -59,17 +72,6 @@ class ShiftController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }

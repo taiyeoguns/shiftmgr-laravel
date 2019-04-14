@@ -4,24 +4,21 @@ $(function() {
       $(this).css("cursor", "pointer");
     })
     .click(function(e) {
-      //console.log(e.target);
       if ($(e.target).is("td")) window.location.href = $(this).attr("href");
     });
 
-  /**/
   $.fn.dataTable.moment("DD/MM/YYYY");
   $(".shifts-table").DataTable();
   $(".past-shifts-table").DataTable({
     order: [[0, "desc"]]
   });
-  /**/
 
   //datepicker
   $("#shift_date").datepicker({
     format: "dd/mm/yyyy",
     startDate: "today",
-    daysOfWeekDisabled: "1,2,3,4,5",
-    daysOfWeekHighlighted: "0,6",
+    daysOfWeekDisabled: "0,6",
+    daysOfWeekHighlighted: "1,2,3,4,5",
     calendarWeeks: true,
     autoclose: true,
     todayHighlight: true
@@ -60,7 +57,7 @@ $(function() {
     validator.resetForm();
   });
 
-  $("#manager, #members, #colleague").chosen({
+  $("#manager, #members").chosen({
     width: "100%"
   });
 });
