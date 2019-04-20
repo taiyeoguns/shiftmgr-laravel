@@ -33,6 +33,7 @@
     "lint-staged": "^8.1.4",
     "lodash": "^4.17.4",
     "moment": "^2.24.0",
+    "prettier": "^1.16.4",
     "popper.js": "^1.12",
     "vue": "^2.5.7"
   }

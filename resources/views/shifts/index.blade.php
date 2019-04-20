@@ -131,9 +131,9 @@
 </div>
 @endunless
 
-@endsection
-
 @include('shifts.modals.create')
+
+@endsection
 
 @section('page-js')
 <script src="{{ mix('js/shifts/index.min.js') }}"></script>

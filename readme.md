@@ -28,7 +28,7 @@ composer install
 Install and run tasks for Frontend dependencies
 
 ```sh
-npm install && npm run dev
+npm install && npm run prod
 ```
 
 Maintain database details in `.env` file

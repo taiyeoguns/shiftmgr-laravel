@@ -14,3 +14,5 @@ yarn-error.log
 backup
 /tests/report
 .php_cs.cache
+/resources/assets/css/shiftmgr.css
+/public/mix-manifest.json
