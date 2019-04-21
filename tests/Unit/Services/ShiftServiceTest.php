@@ -2,12 +2,15 @@
 
 namespace Tests\Unit\Services;
 
+use App\Mail\ShiftCreated;
 use App\Models\Manager;
 use App\Models\Member;
 use App\Models\Shift;
+use App\Models\User;
 use App\Repositories\ShiftRepository;
 use App\Services\ShiftService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class ShiftServiceTest extends TestCase
@@ -103,12 +106,25 @@ class ShiftServiceTest extends TestCase
         $shiftRepository = app(ShiftRepository::class);
         $shiftService = new ShiftService($shiftRepository);
 
+        $user = factory(User::class)->create();
         $mgr = factory(Manager::class)->create();
         $mbrs = factory(Member::class, 3)->create();
+
+        $mgr->user()->save($user);
+
+        Mail::fake();
 
         $shift = $shiftService->addShift("09/04/2019", $mgr->id, $mbrs->pluck('id'));
 
         $this->assertDatabaseHas('shifts', ['id' => $shift->id]);
         $this->assertCount(3, $shift->members);
+
+        Mail::assertSent(ShiftCreated::class, function ($mail) use ($shift) {
+            $mail->build();
+
+            return $mail->shift->id === $shift->id &&
+                $mail->hasTo($shift->manager->user) &&
+                $mail->subject == "Shift Assigned";
+        });
     }
 }

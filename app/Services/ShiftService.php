@@ -2,8 +2,10 @@
 
 namespace App\Services;
 
+use App\Mail\ShiftCreated;
 use App\Repositories\ShiftRepository;
 use Carbon\Carbon;
+use Mail;
 
 class ShiftService
 {
@@ -51,6 +53,9 @@ class ShiftService
         $shift = $this->shiftRepository->create(['shift_date' => Carbon::createFromFormat('d/m/Y', $date), 'manager_id' => $manager]);
 
         $shift->members()->attach($members);
+
+        //send mail
+        Mail::to($shift->manager->user)->send(new ShiftCreated($shift));
 
         return $shift;
     }

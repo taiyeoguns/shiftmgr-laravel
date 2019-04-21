@@ -42,6 +42,8 @@ class ShiftTest extends TestCase
         $members = factory(Member::class, 3)->create();
         $date = "13/04/2019";
 
+        $manager->user()->save($user);
+
         $response = $this->actingAs($user)->json("POST", route("shifts.store"), [
             "shift_date" => $date,
             "manager" => $manager->id,
@@ -67,6 +69,8 @@ class ShiftTest extends TestCase
         $user = factory(User::class)->create();
         $manager = factory(Manager::class)->create();
         $members = factory(Member::class, 3)->create();
+
+        $manager->user()->save($user);
 
         factory(Shift::class)->create([
             "shift_date" => Carbon::create(2019, 4, 13),
