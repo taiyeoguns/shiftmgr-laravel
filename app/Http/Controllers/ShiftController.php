@@ -68,12 +68,12 @@ class ShiftController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  str  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($uuid)
     {
-        //
+        return view('shifts.show');
     }
 
     /**

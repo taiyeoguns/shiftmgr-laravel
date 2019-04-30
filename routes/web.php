@@ -19,3 +19,4 @@ Route::get('/', function () {
 
 Route::get('/shifts', 'ShiftController@index')->name('shifts.index');
 Route::post('/shifts', 'ShiftController@store')->name('shifts.store');
+Route::get('/shifts/{uuid}', 'ShiftController@show')->name('shifts.show');

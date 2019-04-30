@@ -53,4 +53,14 @@ class Shift extends Model
     {
         return $this->belongsToMany(Member::class)->withTimestamps();
     }
+
+    /**
+     * Direct URL to this shift
+     *
+     * @return void
+     */
+    public function getUrlAttribute()
+    {
+        return route("shifts.show", ["uuid" => $this->attributes['uuid']]);
+    }
 }

@@ -38,7 +38,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr href="{{ url('shifts', [$ongoingShift->uuid]) }}">
+                <tr href="{{ $ongoingShift->url }}">
                     <td>{{ $ongoingShift->date->format('d/m/Y') }}</td>
                     @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <td>{{ $ongoingShift->manager->user->name }}</td>
@@ -77,7 +77,7 @@
             </thead>
             <tbody>
                 @foreach($upcomingShifts as $shift)
-                <tr href="{{ url('shifts', [$shift->uuid]) }}" id="{{ $shift->uuid }}">
+                <tr href="{{ $shift->url }}" id="{{ $shift->uuid }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
                     @if(auth()->user()->isMember())
                     <td>{{ $shift->manager->user->name }}</td>
@@ -116,7 +116,7 @@
             </thead>
             <tbody>
                 @foreach($pastShifts as $shift)
-                <tr href="{{ url('shifts', [$shift->uuid]) }}">
+                <tr href="{{ $shift->url }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
                     @cannot('create-calls')
                     <td>{{ $shift->manager->user->name }}</td>
