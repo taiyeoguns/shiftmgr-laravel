@@ -15,15 +15,26 @@ use Tests\TestCase;
 
 class ShiftServiceTest extends TestCase
 {
+    private $shiftService;
+    private $manager;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $shiftRepository = app(ShiftRepository::class);
+
+        $this->shiftService = new ShiftService($shiftRepository);
+
+        $this->manager = factory(Manager::class)->create();
+    }
+
     /**
      * @test
      */
     public function get_shifts_returns_array()
     {
-        $shiftRepository = app(ShiftRepository::class);
-        $shiftService = new ShiftService($shiftRepository);
-
-        $shifts = $shiftService->getShifts();
+        $shifts = $this->shiftService->getShifts();
 
         $this->assertArrayHasKey('pastShifts', $shifts);
     }
@@ -35,19 +46,14 @@ class ShiftServiceTest extends TestCase
     {
         Carbon::setTestNow(Carbon::create(2019, 3, 16));
 
-        $mgr = factory(Manager::class)->create();
-
         for ($i = 1; $i <= 2; $i++) {
             factory(Shift::class)->create([
                 "shift_date" => Carbon::now()->subDays($i),
-                "manager_id" => $mgr->id,
+                "manager_id" => $this->manager->id,
             ]);
         }
 
-        $shiftRepository = app(ShiftRepository::class);
-        $shiftService = new ShiftService($shiftRepository);
-
-        $shifts = $shiftService->getShifts();
+        $shifts = $this->shiftService->getShifts();
 
         $this->assertCount(2, $shifts['pastShifts']);
     }
@@ -59,19 +65,14 @@ class ShiftServiceTest extends TestCase
     {
         Carbon::setTestNow(Carbon::create(2019, 3, 16));
 
-        $mgr = factory(Manager::class)->create();
-
         for ($i = 1; $i <= 2; $i++) {
             factory(Shift::class)->create([
                 "shift_date" => Carbon::now()->addDays($i),
-                "manager_id" => $mgr->id,
+                "manager_id" => $this->manager->id,
             ]);
         }
 
-        $shiftRepository = app(ShiftRepository::class);
-        $shiftService = new ShiftService($shiftRepository);
-
-        $shifts = $shiftService->getShifts();
+        $shifts = $this->shiftService->getShifts();
 
         $this->assertCount(2, $shifts['upcomingShifts']);
     }
@@ -83,17 +84,12 @@ class ShiftServiceTest extends TestCase
     {
         Carbon::setTestNow(Carbon::create(2019, 3, 16));
 
-        $mgr = factory(Manager::class)->create();
-
         $shift = new Shift();
         $shift->date = "16/03/2019";
-        $shift->manager()->associate($mgr);
+        $shift->manager()->associate($this->manager);
         $shift->save();
 
-        $shiftRepository = app(ShiftRepository::class);
-        $shiftService = new ShiftService($shiftRepository);
-
-        $shifts = $shiftService->getShifts();
+        $shifts = $this->shiftService->getShifts();
 
         $this->assertTrue($shift->is($shifts['ongoingShift']));
     }
@@ -103,18 +99,14 @@ class ShiftServiceTest extends TestCase
      */
     public function add_shift_creates_new_shift()
     {
-        $shiftRepository = app(ShiftRepository::class);
-        $shiftService = new ShiftService($shiftRepository);
-
         $user = factory(User::class)->create();
-        $mgr = factory(Manager::class)->create();
-        $mbrs = factory(Member::class, 3)->create();
+        $members = factory(Member::class, 3)->create();
 
-        $mgr->user()->save($user);
+        $this->manager->user()->save($user);
 
         Mail::fake();
 
-        $shift = $shiftService->addShift("09/04/2019", $mgr->id, $mbrs->pluck('id'));
+        $shift = $this->shiftService->addShift("09/04/2019", $this->manager->id, $members->pluck('id'));
 
         $this->assertDatabaseHas('shifts', ['id' => $shift->id]);
         $this->assertCount(3, $shift->members);

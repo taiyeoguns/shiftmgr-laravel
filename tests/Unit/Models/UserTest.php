@@ -9,18 +9,24 @@ use Tests\TestCase;
 
 class UserTest extends TestCase
 {
+    private $user;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->user = factory(User::class)->make([
+            'first_name' => 'John',
+            'last_name' => 'Doe'
+        ]);
+    }
 
     /**
      * @test
      */
     public function user_full_name_is_returned()
     {
-        $user = factory(User::class)->make([
-            'first_name' => 'John',
-            'last_name' => 'Doe'
-        ]);
-
-        $this->assertEquals($user->name, 'John Doe');
+        $this->assertEquals($this->user->name, 'John Doe');
     }
 
     /**
@@ -29,11 +35,10 @@ class UserTest extends TestCase
     public function userable_is_returned()
     {
         $member = factory(Member::class)->create();
-        $user = factory(User::class)->create();
 
-        $member->user()->save($user);
+        $member->user()->save($this->user);
 
-        $this->assertInstanceOf(Member::class, $user->userable);
+        $this->assertInstanceOf(Member::class, $this->user->userable);
     }
 
     /**
@@ -42,11 +47,10 @@ class UserTest extends TestCase
     public function checks_if_user_is_a_member()
     {
         $member = factory(Member::class)->create();
-        $user = factory(User::class)->create();
 
-        $member->user()->save($user);
+        $member->user()->save($this->user);
 
-        $this->assertTrue($user->isMember());
+        $this->assertTrue($this->user->isMember());
     }
 
     /**
@@ -55,10 +59,9 @@ class UserTest extends TestCase
     public function checks_if_user_is_a_manager()
     {
         $manager = factory(Manager::class)->create();
-        $user = factory(User::class)->create();
 
-        $manager->user()->save($user);
+        $manager->user()->save($this->user);
 
-        $this->assertTrue($user->isManager());
+        $this->assertTrue($this->user->isManager());
     }
 }
