@@ -48,6 +48,18 @@
 
         <br />
 
+        @if ($errors->any())
+        <div class="alert alert-danger alert-important">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>Error(s):</strong>
+          <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+          </ul>
+        </div>
+        @endif
+
         @include('flash::message')
 
         @yield('content')
