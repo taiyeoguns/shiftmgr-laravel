@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreShift;
+use App\Models\Shift;
 use App\Repositories\ManagerRepository;
 use App\Repositories\MemberRepository;
 use App\Services\ShiftService;
@@ -71,9 +72,11 @@ class ShiftController extends Controller
      * @param  str  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function show($uuid)
+    public function show(Shift $shift)
     {
-        return view('shifts.show');
+        $page_title = sprintf("Shift: %s", $shift->date->format('l, d/m/Y'));
+
+        return view('shifts.show', compact(['shift', 'page_title']));
     }
 
     /**

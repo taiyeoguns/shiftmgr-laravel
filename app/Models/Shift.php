@@ -63,4 +63,14 @@ class Shift extends Model
     {
         return route("shifts.show", ["uuid" => $this->attributes['uuid']]);
     }
+
+    /**
+     * Route key
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 }
