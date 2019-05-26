@@ -25,4 +25,14 @@ class Member extends Model
     {
         return $this->belongsToMany(Shift::class)->withTimestamps();
     }
+
+    /**
+     * Tasks belonging to this member
+     *
+     * @return void
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

@@ -73,4 +73,21 @@ class Shift extends Model
     {
         return 'uuid';
     }
+
+    /**
+     * Tasks for this shift
+     */
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
+
+    public function userTasks()
+    {
+        if (auth()->user()->isMember()) {
+            return $this->tasks()->where("member_id", auth()->user()->userable_id)->get();
+        } else {
+            return $this->tasks;
+        }
+    }
 }
