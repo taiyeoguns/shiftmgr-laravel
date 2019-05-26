@@ -18,7 +18,8 @@
     "predis/predis": "^1.1",
     "prettus/l5-repository": "^2.6",
     "rschaaphuizen/laravel-services": "^1.0",
-    "silber/bouncer": "v1.0.0-rc.5"
+    "silber/bouncer": "v1.0.0-rc.5",
+    "spatie/laravel-blade-javascript": "^2.2"
   },
   "require-dev": {
     "filp/whoops": "^2.0",
