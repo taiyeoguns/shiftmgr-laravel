@@ -14,6 +14,7 @@
 use App\Models\Manager;
 use App\Models\Member;
 use App\Models\Shift;
+use App\Models\Task;
 use App\Models\User;
 use Carbon\Carbon;
 use Ramsey\Uuid\Uuid;
@@ -33,7 +34,7 @@ $factory->define(User::class, function (Faker\Generator $faker) {
         'last_name' => $ln = $faker->lastName,
         'email' => strtolower(sprintf('%s.%s@shiftmanager.local', $fn, $ln)),
         'phone' => $faker->phoneNumber,
-        'password' => bcrypt(str_random(10)),
+        'password' => \Hash::make(env('DEFAULT_USER_PASSWORD')),
         'remember_token' => str_random(10),
 
     ];
@@ -43,5 +44,22 @@ $factory->define(Shift::class, function (Faker\Generator $faker) {
     return [
         'uuid'  => Uuid::uuid4()->toString(),
         'shift_date' => Carbon::create($faker->year($max = "now"), $faker->numberBetween(1, 12), $faker->numberBetween(1, 28)),
+    ];
+});
+
+$factory->define(Task::class, function (Faker\Generator $faker) {
+    return [
+        'title'  => $faker->sentence,
+        'start'  => $start = Carbon::create(
+            Carbon::now()->year,
+            $faker->numberBetween(1, 12),
+            $faker->numberBetween(1, 28),
+            $faker->numberBetween(8, 14),
+            $faker->randomElement([0, 15, 30, 45])
+        ),
+        'end' => $start
+            ->copy()
+            ->addHours($faker->numberBetween(1, 3))
+            ->addMinutes($faker->randomElement([0, 15, 30, 45])),
     ];
 });
