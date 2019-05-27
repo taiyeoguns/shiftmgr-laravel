@@ -18,7 +18,11 @@ class ShiftService
 
     public function getShifts()
     {
-        $shifts = $this->shiftRepository->all();
+        $shifts = auth()->user()->can('admin') ? $this->shiftRepository->all() : auth()->user()->userable->shifts;
+
+        if (!$shifts) {
+            return null;
+        }
 
         $pastShifts = $shifts
             ->filter(function ($shift, $key) {
