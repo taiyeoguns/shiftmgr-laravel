@@ -7,5 +7,7 @@
     "/css/shifts/index.min.css": "/css/shifts/index.min.css",
     "/css/shifts/chosen-sprite.png": "/css/shifts/chosen-sprite.png",
     "/css/shifts/chosen-sprite@2x.png": "/css/shifts/chosen-sprite@2x.png",
-    "/js/shifts/index.min.js": "/js/shifts/index.min.js"
+    "/js/shifts/index.min.js": "/js/shifts/index.min.js",
+    "/css/shifts/show.min.css": "/css/shifts/show.min.css",
+    "/js/shifts/show.min.js": "/js/shifts/show.min.js"
 }

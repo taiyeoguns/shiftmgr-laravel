@@ -59,7 +59,7 @@ mix.copy(nodeDir + "bootstrap/fonts", "public/fonts");
 mix.copy(nodeDir + "ionicons/dist/fonts", "public/fonts");
 mix.copy(nodeDir + "font-awesome/fonts", "public/fonts");
 
-//app
+//shifts-index
 
 mix.styles(
   [
@@ -89,4 +89,38 @@ mix.scripts(
     jsDir + "/shifts/index.js"
   ],
   "public/js/shifts/index.min.js"
+);
+
+//shifts-show
+
+mix.styles(
+  [
+    nodeDir + "datatables.net-bs/css/dataTables.bootstrap.min.css",
+    nodeDir + "chosen-js/chosen.min.css",
+    nodeDir + "vis/dist/vis.min.css",
+    nodeDir + "jquery-ui/themes/base/datepicker.css",
+    nodeDir + "jquery-confirm/dist/jquery-confirm.min.css",
+    nodeDir +
+      "jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css"
+  ],
+  "public/css/shifts/show.min.css"
+);
+
+mix.scripts(
+  [
+    nodeDir + "datatables.net/js/jquery.dataTables.min.js",
+    nodeDir + "datatables.net-bs/js/dataTables.bootstrap.min.js",
+    nodeDir + "moment/min/moment.min.js",
+    nodeDir + "datatable-sorting-datetime-moment/index.js",
+    nodeDir + "chosen-js/chosen.jquery.min.js",
+    nodeDir + "vis/dist/vis.min.js",
+    nodeDir +
+      "jqueryui-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js",
+    nodeDir + "jquery-confirm/dist/jquery-confirm.min.js",
+    nodeDir + "jquery-validation/dist/jquery.validate.min.js",
+    nodeDir + "lodash/lodash.min.js",
+    jsDir + "ext/jquery.validate.bootstrap.js",
+    jsDir + "/shifts/show.js"
+  ],
+  "public/js/shifts/show.min.js"
 );
