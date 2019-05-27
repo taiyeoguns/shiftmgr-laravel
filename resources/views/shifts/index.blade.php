@@ -7,11 +7,13 @@
 
 @section('content')
 
+@can('admin')
 <div class="row">
     <p class="text-center">
         <a href="#" class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal"><i class="fa fa-plus"></i>&nbsp;&nbsp;Add Shift</a>
     </p>
 </div>
+@endcan
 
 <br />
 
@@ -63,14 +65,14 @@
     </div>
     <div class="box-body">
         <!---->
-        @if($upcomingShifts->isEmpty())
+        @if(!$upcomingShifts || $upcomingShifts->isEmpty())
         <em>No upcoming shifts.</em>
         @else
         <table class="table table-bordered table-hover table-striped shifts-table">
             <thead>
                 <tr>
                     <th>Shift Date</th>
-                    @if(auth()->user()->isMember())
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <th>Manager</th>
                     @endif
                 </tr>
@@ -79,7 +81,7 @@
                 @foreach($upcomingShifts as $shift)
                 <tr href="{{ $shift->url }}" id="{{ $shift->uuid }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
-                    @if(auth()->user()->isMember())
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <td>{{ $shift->manager->user->name }}</td>
                     @endif
                 </tr>
@@ -92,7 +94,7 @@
 </div>
 
 
-@unless($pastShifts->isEmpty())
+@unless(!$pastShifts || $pastShifts->isEmpty())
 <div class="box box-default">
     <div class="box-header with-border">
         <h3 class="box-title">Past Shifts</h3>
@@ -109,18 +111,18 @@
             <thead>
                 <tr>
                     <th>Shift Date</th>
-                    @cannot('create-calls')
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <th>Manager</th>
-                    @endcannot
+                    @endif
                 </tr>
             </thead>
             <tbody>
                 @foreach($pastShifts as $shift)
                 <tr href="{{ $shift->url }}">
                     <td>{{ $shift->date->format('d/m/Y') }}</td>
-                    @cannot('create-calls')
+                    @if(auth()->user()->isMember() || auth()->user()->isAn('admin'))
                     <td>{{ $shift->manager->user->name }}</td>
-                    @endcannot
+                    @endif
                 </tr>
                 @endforeach
             </tbody>
