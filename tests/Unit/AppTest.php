@@ -2,7 +2,11 @@
 
 namespace Tests\Unit;
 
+use App\Models\Manager;
+use App\Models\Shift;
 use App\Models\User;
+use Bouncer;
+use Carbon\Carbon;
 
 use Tests\TestCase;
 
@@ -67,6 +71,15 @@ class AppTest extends TestCase
     public function logged_in_user_can_view_shifts_page()
     {
         $user = factory(User::class)->create();
+        $manager = factory(Manager::class)->create();
+
+        $manager->user()->save($user);
+        Bouncer::assign('manager')->to($user);
+
+        factory(Shift::class)->create([
+            "shift_date" => Carbon::now(),
+            "manager_id" => $manager->id,
+        ]);
 
         $response = $this->actingAs($user)->get(route('shifts.index'));
 

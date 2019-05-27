@@ -9,6 +9,7 @@ use App\Models\Shift;
 use App\Models\User;
 use App\Repositories\ShiftRepository;
 use App\Services\ShiftService;
+use Bouncer;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
@@ -26,7 +27,12 @@ class ShiftServiceTest extends TestCase
 
         $this->shiftService = new ShiftService($shiftRepository);
 
+        $user = factory(User::class)->create();
         $this->manager = factory(Manager::class)->create();
+
+        Bouncer::assign('manager')->to($user);
+
+        $this->manager->user()->save($user);
     }
 
     /**
@@ -34,7 +40,7 @@ class ShiftServiceTest extends TestCase
      */
     public function get_shifts_returns_array()
     {
-        $shifts = $this->shiftService->getShifts();
+        $shifts = $this->actingAs($this->manager->user)->shiftService->getShifts();
 
         $this->assertArrayHasKey('pastShifts', $shifts);
     }
@@ -53,7 +59,7 @@ class ShiftServiceTest extends TestCase
             ]);
         }
 
-        $shifts = $this->shiftService->getShifts();
+        $shifts = $this->actingAs($this->manager->user)->shiftService->getShifts();
 
         $this->assertCount(2, $shifts['pastShifts']);
     }
@@ -72,7 +78,7 @@ class ShiftServiceTest extends TestCase
             ]);
         }
 
-        $shifts = $this->shiftService->getShifts();
+        $shifts = $this->actingAs($this->manager->user)->shiftService->getShifts();
 
         $this->assertCount(2, $shifts['upcomingShifts']);
     }
@@ -89,7 +95,7 @@ class ShiftServiceTest extends TestCase
         $shift->manager()->associate($this->manager);
         $shift->save();
 
-        $shifts = $this->shiftService->getShifts();
+        $shifts = $this->actingAs($this->manager->user)->shiftService->getShifts();
 
         $this->assertTrue($shift->is($shifts['ongoingShift']));
     }
@@ -99,10 +105,7 @@ class ShiftServiceTest extends TestCase
      */
     public function add_shift_creates_new_shift()
     {
-        $user = factory(User::class)->create();
         $members = factory(Member::class, 3)->create();
-
-        $this->manager->user()->save($user);
 
         Mail::fake();
 
